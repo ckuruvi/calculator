@@ -2,14 +2,14 @@
 var valObj={x:'',y:'',type:''};
 
 $(function(){
-
-  //console.log("Inside JQuery document ready function");
-  //$('button').on('click','.operator',loadValueObj);
   $('button').on('click',clickIdentifier);
-
 
 });
 
+// button clicks grouped into three catogeries
+// 1) Numbers & operators is forwarded to function 'loadObjectData'
+// 2) AC( All Clear) & CE( clear) is forwarded to function 'clearObjectData'
+// 3) Equals(=) calls calculateObjectData function which makes the ajax call to server.
 function clickIdentifier(){
   var textVal=$(this).attr('id');
   var textType=$(this).attr('data-type');
@@ -24,10 +24,10 @@ function clickIdentifier(){
   }
 }
 
-
+// ajax call to server with data passed as object stored as global variable 'valObj'
+// result on success is processed by  function 'displayResult'
 function calculateObjectData(){
   var mathOperation=typeConverter();
-  console.log("inside calculateObjectData function"+valObj.type);
   $.ajax({
     url:'/'+mathOperation,
     type:'POST',
@@ -37,16 +37,15 @@ function calculateObjectData(){
 
 }
 
+// appends response from server onto DOM.
+// The result value is also set to  global variable object (valObj.x)
 function displayResult(dataObj){
-  //console.log('inside displayCalulation function:: ');
   var value=dataObj.result;
-  //console.log(value);
-  valObj.x=value;valObj.type='';valObj.y='';
+  valObj.x=''+value;valObj.type='';valObj.y='';
   displayText();
-  //console.log(valObj);
-  //$('input').val(value);
 }
 
+// converts math operator symbols stored in the global valObj to words.
 function typeConverter(){
   switch (valObj.type) {
     case '+':
@@ -64,11 +63,12 @@ function typeConverter(){
     case '%':
     valObj.type='modulus';
   }
-
-
   return valObj.type;
 }
 
+// clear deleted one property of the global object at a time starting with valObj.y
+// followed by valObj.type and valObj.x.
+// allClear resets to all values in the global object to empty string
 function clearObjectData(textVal){
   //  console.log('inside clearObjectData'+textVal);
   if(textVal=='clear'){
@@ -86,13 +86,11 @@ function clearObjectData(textVal){
   displayText();
 }
 
+// loads user selected numbers  & math opeators on the global object 'valObj'
 function loadObjectData(textVal,textType){
   var decimalCheck;
-  //console.log(textVal+'::'+textType);
   if(textType=='numeral'){
-
     if(valObj.type==''){
-      //console.log()
       (valObj.x.includes('.') && textVal=='.' )?valObj.x:valObj.x+=textVal;
     }else{
       (valObj.y.includes('.') && textVal=='.')?valObj.y:valObj.y+=textVal;
@@ -105,6 +103,7 @@ function loadObjectData(textVal,textType){
   displayText();
 }
 
+// appends and displays 'valObj' values onto the DOM.  
 function displayText(){
   //$('input').remove();
   $('input').val(valObj.x+valObj.type+valObj.y);
