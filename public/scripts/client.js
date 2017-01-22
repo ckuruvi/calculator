@@ -16,24 +16,24 @@ function clickIdentifier(){
   if(textType=='numeral' || textType=='operator'){
     loadObjectData(textVal,textType);
   }else if(textVal=='clear'|| textVal=='allClear'){
-     clearObjectData(textVal);
+    clearObjectData(textVal);
   }else if(textVal=='equals'){
     if(valObj.x!=''&& valObj.type!=''&& valObj.y!=''){
-     calculateObjectData();
-   }
+      calculateObjectData();
+    }
   }
 }
 
 
 function calculateObjectData(){
-var mathOperation=typeConverter();
-console.log("inside calculateObjectData function"+valObj.type);
+  var mathOperation=typeConverter();
+  console.log("inside calculateObjectData function"+valObj.type);
   $.ajax({
-  url:'/'+mathOperation,
-  type:'POST',
-  data:valObj,
-  success:displayResult
-});
+    url:'/'+mathOperation,
+    type:'POST',
+    data:valObj,
+    success:displayResult
+  });
 
 }
 
@@ -48,42 +48,42 @@ function displayResult(dataObj){
 }
 
 function typeConverter(){
-switch (valObj.type) {
-  case '+':
+  switch (valObj.type) {
+    case '+':
     valObj.type='addition';
     break;
-  case '-':
+    case '-':
     valObj.type='subtraction';
     break;
-  case '*':
+    case '*':
     valObj.type='multiplication';
     break;
-  case '/':
+    case '/':
     valObj.type='division';
     break;
-  case '%':
-   valObj.type='modulus';
-}
+    case '%':
+    valObj.type='modulus';
+  }
 
 
-return valObj.type;
+  return valObj.type;
 }
 
 function clearObjectData(textVal){
-//  console.log('inside clearObjectData'+textVal);
-   if(textVal=='clear'){
-      if(valObj.y!=''){
-        valObj.y='';
-      }else if(valObj.type!=''){
-        valObj.type='';
-      }else if(valObj.x!=''){
-        valObj.x='';
-      }
-   }else if(textVal=='allClear'){
-     valObj.x='';valObj.type='';valObj.y='';
+  //  console.log('inside clearObjectData'+textVal);
+  if(textVal=='clear'){
+    if(valObj.y!=''){
+      valObj.y='';
+    }else if(valObj.type!=''){
+      valObj.type='';
+    }else if(valObj.x!=''){
+      valObj.x='';
+    }
+  }else if(textVal=='allClear'){
+    valObj.x='';valObj.type='';valObj.y='';
 
-   }
-   displayText();
+  }
+  displayText();
 }
 
 function loadObjectData(textVal,textType){
@@ -96,14 +96,14 @@ function loadObjectData(textVal,textType){
     }
   } else if(textType=='operator'){
     if((valObj.x!=''&& valObj.type=='') || (valObj.type!='' && valObj.y=='')){
-    valObj.type=textVal;
-  }
+      valObj.type=textVal;
+    }
   }
   displayText();
 }
 
-  function displayText(){
-    //$('input').remove();
-    $('input').val(valObj.x+valObj.type+valObj.y);
+function displayText(){
+  //$('input').remove();
+  $('input').val(valObj.x+valObj.type+valObj.y);
 
-  }
+}
