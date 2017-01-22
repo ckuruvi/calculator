@@ -87,12 +87,15 @@ function clearObjectData(textVal){
 }
 
 function loadObjectData(textVal,textType){
+  var decimalCheck;
   //console.log(textVal+'::'+textType);
   if(textType=='numeral'){
+
     if(valObj.type==''){
-      valObj.x+=textVal;
+      //console.log()
+      (valObj.x.includes('.') && textVal=='.' )?valObj.x:valObj.x+=textVal;
     }else{
-      valObj.y+=textVal;
+      (valObj.y.includes('.') && textVal=='.')?valObj.y:valObj.y+=textVal;
     }
   } else if(textType=='operator'){
     if((valObj.x!=''&& valObj.type=='') || (valObj.type!='' && valObj.y=='')){
