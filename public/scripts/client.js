@@ -42,10 +42,9 @@ function displayResult(dataObj){
   var value=dataObj.result;
   //console.log(value);
   valObj.x=value;valObj.type='';valObj.y='';
-  console.log(valObj);
-  $('input').val(value);
-
-
+  displayText();
+  //console.log(valObj);
+  //$('input').val(value);
 }
 
 function typeConverter(){
