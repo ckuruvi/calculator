@@ -1,0 +1,44 @@
+.container{
+  /*border: 1px solid;*/
+  margin-top:100px;
+}
+
+.jombotron{
+  border:1px solid;
+}
+
+.page-header{
+  border:1px solid;
+}
+
+button{
+  width:50px;
+}
+#result{
+  /*border: 1px solid;*/
+  width:220px;
+  height:30px;
+  margin: auto;
+}
+#result .screen{
+  /*border: 1px solid;*/
+  width:200px;
+  height:30px;
+  margin: auto;
+  border-radius:5px;
+}
+
+.btn{
+  border:1px solid;
+}
+
+.calc{
+  border:1px solid;
+  width:220px;
+  margin:auto;
+  border-radius: 5px;
+}
+
+.space{
+  height:10px;
+}
