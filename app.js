@@ -9,4 +9,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/',calculate);
 
-app.listen(3000);
+app.listen(3000,function(){
+  console.log('running on localhost:3000');
+});
